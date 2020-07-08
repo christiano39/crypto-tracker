@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios';
+import Chart from './Chart'
 
 const CoinPage = props => {
     const { coinId } = useParams();
-    const [coin, setCoin] = useState(null)
+    const [coin, setCoin] = useState(null);
+    const history = useHistory();
 
     const createMarkup = html => {
         return {__html: html};
     }
 
+    const onBackButtonClick = e => {
+        history.goBack();
+    }
+
     useEffect(() => {
         axios
-          .get(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false`)
+          .get(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&sparkline=true`)
           .then(res => {
               console.log(res.data);
               setCoin(res.data);
@@ -28,6 +34,7 @@ const CoinPage = props => {
 
     return (
         <section className='coin-page'>
+            <div className='back-button' onClick={onBackButtonClick}>{'< back'}</div>
             <div className='main-info'>
                 <h1 className='coin-name'>{coin.name} ({coin.symbol})</h1>
                 <img className='logo' src={coin.image.large} alt={coin.name} />
@@ -49,6 +56,7 @@ const CoinPage = props => {
                     <p>Price Change past 24h: {coin.market_data.price_change_24h_in_currency.usd}</p>
                 </div>
             </div>
+            <Chart sparklineData={coin.market_data.sparkline_7d.price} />
         </section>
     )
 }
