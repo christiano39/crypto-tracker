@@ -239,6 +239,16 @@ img {
   text-align: left;
 }
 
+.chart-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+}
+
 .coin__symbol {
   display: block;
   margin-bottom: 10px;
