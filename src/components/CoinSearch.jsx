@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
 import CoinCard from './CoinCard'
 
-const dummyCoinList = [
-    {
-        id: '0cash',
-        symbol: 'zch',
-        name: '0cash',
-    },
-    {
-        id: 'btc',
-        symbol: 'btc',
-        name: 'bitcoin',
-    }
-]
-
 const CoinSearch = props => {
     const [searchTerm, setSearchTerm] = useState('');
     const { coinList } = props;
