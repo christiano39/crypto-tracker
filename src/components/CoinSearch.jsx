@@ -20,7 +20,7 @@ const CoinSearch = props => {
               type='text'
               value={searchTerm}
               onChange={onInputChange}
-              placeholder='your favorite crypto'
+              placeholder='your favorite crypto...'
             />
             <div className='coins-list'>
                 {
