@@ -6,11 +6,13 @@ import axios from "axios";
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import CoinPage from './components/CoinPage'
 
 import "./styles.scss";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
+  const [coinList, setCoinList] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,17 +21,27 @@ const App = () => {
       )
       .then(res => setCoinData(res.data))
       .catch(err => console.log(err));
+
+    axios
+      .get(
+        "https://api.coingecko.com/api/v3/coins/list"
+      )
+      .then(res => setCoinList(res.data))
+      .catch(err => console.log(err))
   }, []);
   return (
     <Router>
       <div className="App">
         <Navbar />
         <Switch>
+          <Route path='/coins/:coinId'>
+            <CoinPage />
+          </Route>
           <Route path='/charts'>
             <Charts coinData={coinData} />
           </Route>
           <Route path='/'>
-            <Home />
+            <Home coinList={coinList}/>
           </Route>
         </Switch>
       </div>
