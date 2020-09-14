@@ -1,3 +1,5 @@
+Deployed App: https://crypto-graphs.vercel.app/
+
 # Crypto Tracker
 
 This app was a project from my time in Lambda School. We were tasked with creating a custom hook with React that would toggle the theme between dark and light mode. We also stored this selection into local storage so that the app would remember your theme preference. 
